@@ -45,11 +45,6 @@ void	exec_ops(t_stack *a, t_stack *b)
 	init_funcs(f);
 	while (get_next_line(0, &line) > 0)
 	{
-		if (!ft_strcmp("", line))
-		{
-			free(line);
-			break;
-		}
 		f[get_ops_code(line)](a, b, line);
 		if (!get_ops_code(line))
 		{
