@@ -13,7 +13,7 @@ PSW_INCLUDES		=	-I./psh_swap/ $(LIBFTINC)
 PSW_OBJ				=	$(P_SWAP_FILES:.c=.o)
 
 CHECKER_SRC_PATH	=	./check/
-CHECKER_FILES		=	checker.c ops.c create_stack.c \
+CHECKER_FILES		=	checker.c ops.c create_stack.c utils.c \
 						check_valid.c check_stack.c ops_name.c
 CHECKER_INCLUDES	=	-I./check/ $(LIBFTINC)
 CH_OBJ				=	$(CHECKER_FILES:.c=.o)
