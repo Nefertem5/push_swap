@@ -28,9 +28,11 @@ long long		ft_atoll(const char *str)
 
 static int		is_valid_arg(const char *arg)
 {
+	if (*arg == '-')
+		arg++;
 	while (*arg)
 	{
-		if (!ft_isdigit(*arg) && *arg != '-')
+		if (!ft_isdigit(*arg))
 			return (0);
 		arg++;
 	}
@@ -63,17 +65,36 @@ static int		check_duplicates(long long *arr, int siz)
 	return (1);
 }
 
-int				check_valid(int argc, char const **argv)
+int				ft_strlen_max(const char *str)
+{
+	int	i;
+	int	result;
+
+	result = 0;
+	i = 0;
+	while (str[i] == '-' || str[i] == '0')
+		i++;
+	while (str[i])
+	{
+		i++;
+		result++;
+	}
+	return (result);
+}
+
+int				check_valid(int argc, char const **argv, int flag)
 {
 	long long	arr[argc - 1];
 	int			i;
 
-	i = 1;
+	i = 1 - flag;
 	while (i < argc)
 	{
 		if (!is_valid_arg(argv[i]))
 			return (0);
 		arr[i - 1] = ft_atoll(argv[i]);
+		if (ft_strlen_max(argv[i]) > 20)
+			return (0);
 		i++;
 	}
 	if (!check_duplicates(arr, argc - 1))

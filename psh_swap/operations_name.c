@@ -34,42 +34,42 @@ void	print_push(t_stack *a, t_stack *b, char name)
 	}
 }
 
-void	print_rotate(t_stack a, t_stack b, char name)
+void	print_rotate(t_stack *a, t_stack *b, char name)
 {
 	if (name == 'a')
 	{
-		rotate(a);
+		rotate(*a);
 		ft_printf("r%c\n", name);
 	}
 	if (name == 'b')
 	{
-		rotate(b);
+		rotate(*b);
 		ft_printf("r%c\n", name);
 	}
 	if (name == 'r')
 	{
-		rotate(a);
-		rotate(b);
+		rotate(*a);
+		rotate(*b);
 		ft_printf("r%c\n", name);
 	}
 }
 
-void	print_revrotate(t_stack a, t_stack b, char name)
+void	print_revrotate(t_stack *a, t_stack *b, char name)
 {
 	if (name == 'a')
 	{
-		reverse_rotate(a);
+		reverse_rotate(*a);
 		ft_printf("rr%c\n", name);
 	}
 	if (name == 'b')
 	{
-		reverse_rotate(b);
+		reverse_rotate(*b);
 		ft_printf("rr%c\n", name);
 	}
 	if (name == 'r')
 	{
-		reverse_rotate(a);
-		reverse_rotate(b);
+		reverse_rotate(*a);
+		reverse_rotate(*b);
 		ft_printf("rr%c\n", name);
 	}
 }

@@ -37,7 +37,7 @@ void	init_funcs(void (*f[4])())
 	f[4] = &reverse_rotate_inner;
 }
 
-void	exec_ops(t_stack *a, t_stack *b)
+void	exec_ops(t_stack *a, t_stack *b, int flag)
 {
 	char	*line;
 	void	(*f[5])();
@@ -51,6 +51,8 @@ void	exec_ops(t_stack *a, t_stack *b)
 			free(line);
 			exit(0);
 		}
+		if (flag)
+			stacks_print(*a, *b);
 		free(line);
 	}
 	if (is_sorted(a) && b->size == 0)
@@ -59,20 +61,101 @@ void	exec_ops(t_stack *a, t_stack *b)
 		ft_putstr("KO\n");
 }
 
-int	main(int argc, char const *argv[])
+void			ft_del_tab(char **tab)
+{
+	size_t	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		++i;
+	}
+	free(tab);
+}
+
+void	stack_print(t_stack stack)
+{
+	int		i;
+
+	i = 0;
+	ft_putstr("Size:");
+	ft_putnbr(stack.size);
+	ft_putstr(" | Stack: [");
+	while (i < stack.size)
+	{
+		ft_putnbr(stack.nums[i]);
+		if (i + 1 != stack.size)
+			ft_putstr(", ");
+		i++;
+	}
+	ft_putchar(']');
+	ft_putchar('\n');
+}
+
+void	stacks_print(t_stack stack_a, t_stack stack_b)
+{
+	stack_print(stack_a);
+	stack_print(stack_b);
+}
+
+void	error_ex()
+{
+	ft_putstr("Error\n");
+	exit(1);
+}
+
+int	check_len(char **av)
+{
+	int	i;
+
+	i = 0;
+	while(av[i])
+	{
+		i++;
+	}
+	return (i);
+}
+
+int	main(int argc, char const **argv)
 {
 	t_stack	a;
 	t_stack	b;
+	int		flag;
+	int		v_flag;
+	char	**argvs;
 
+	flag = 0;
 	if (argc == 1)
 		exit(0);
-	if (!check_valid(argc, argv))
+	if (argc == 2 && (flag = 1))
 	{
-		ft_putstr("Error\n");
-		exit(1);
+		argvs = ft_strsplit(argv[1], ' ');
+		v_flag = ft_strcmp(argvs[0], "-v") == 0;
 	}
-	a = create_stack_a(argc - 1, argv);
-	b = create_stack_b(argc - 1, argv);
-	exec_ops(&a, &b);
+	else
+		v_flag = ft_strcmp(argv[1], "-v") == 0;
+	if (flag == 1 && !check_valid(argc - v_flag, (const char**)argvs + v_flag))
+	{
+		ft_del_tab(argvs);
+		error_ex();
+	}
+	else if (!check_valid(argc - v_flag, argv + v_flag))
+		error_ex();
+	if (flag == 0)
+	{
+		a = create_stack_a(argc - 1 - v_flag, argv + v_flag, flag);
+		b = create_stack_b(argc - 1 - v_flag, argv + v_flag, flag);
+	}
+	else
+	{
+		a = create_stack_a(check_len(argvs) - v_flag, (const char **)argvs + v_flag, flag);
+		b = create_stack_b(check_len(argvs) - v_flag,  (const char **)argvs + v_flag, flag);
+	}
+	exec_ops(&a, &b, v_flag);
+	free(a.nums);
+	free(b.nums);
+	if (flag == 1)
+		ft_del_tab(argvs);
 	return (0);
 }
