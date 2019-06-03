@@ -92,10 +92,10 @@ int				check_valid(int argc, char const **argv, int flag)
 	{
 		if (!is_valid_arg(argv[i]))
 			return (0);
-		if (!flag)
-			arr[i - 1] = ft_atoll(argv[i]);
-		else
+		if (flag)
 			arr[i] = ft_atoll(argv[i]);
+		else
+			arr[i - 1] = ft_atoll(argv[i]);
 		if (ft_strlen_max(argv[i]) >= 19)
 			return (0);
 		i++;
