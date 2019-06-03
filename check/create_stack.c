@@ -39,3 +39,12 @@ t_stack	create_stack_a(int argc, char const **argv, int flag)
 	}
 	return (stack);
 }
+
+t_stack create_stacks(t_stack *b, int argc, char const **argv, int flag)
+{
+	t_stack stack_a;
+
+	stack_a = create_stack_a(argc, argv, flag);
+	*b = create_stack_b(argc, argv, flag);
+	return (stack_a);
+}

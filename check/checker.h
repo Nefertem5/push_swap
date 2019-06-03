@@ -30,5 +30,6 @@ void			error_ex(char **argvs);
 void			stacks_print(t_stack stack_a, t_stack stack_b);
 void			exec_ops(t_stack *a, t_stack *b, int flag);
 void			ft_del_tab(char **tab);
+t_stack			create_stacks(t_stack *b, int argc, char const **argv, int flag);
 
 #endif

@@ -32,15 +32,9 @@ int		main(int argc, char const **argv)
 	else if (!check_valid(argc - v_flag, argv + v_flag))
 		error_ex(NULL);
 	if (flag == 0)
-	{
-		a = create_stack_a(argc - 1 - v_flag, argv + v_flag, flag);
-		b = create_stack_b(argc - 1 - v_flag, argv + v_flag, flag);
-	}
+		a = create_stacks(&b, argc - 1 - v_flag, argv + v_flag, flag);
 	else
-	{
-		a = create_stack_a(check_len(argvs) - v_flag, (const char **)argvs + v_flag, flag);
-		b = create_stack_b(check_len(argvs) - v_flag,  (const char **)argvs + v_flag, flag);
-	}
+		a = create_stacks(&b, check_len(argvs) - v_flag, (const char **)argvs + v_flag, flag);
 	exec_ops(&a, &b, v_flag);
 	return (to_return(a.nums, b.nums, flag, argvs));
 }
