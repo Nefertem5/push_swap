@@ -26,9 +26,9 @@ void			push_inner(t_stack *a, t_stack *b, char *str);
 void			rotate_inner(t_stack *a, t_stack *b, char *str);
 void			reverse_rotate_inner(t_stack *a, t_stack *b, char *str);
 int				check_len(char **av);
-void			error_ex();
+void			error_ex(char **argvs);
 void			stacks_print(t_stack stack_a, t_stack stack_b);
-void			stack_print(t_stack stack);
+void			exec_ops(t_stack *a, t_stack *b, int flag);
 void			ft_del_tab(char **tab);
 
 #endif
