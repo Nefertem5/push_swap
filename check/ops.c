@@ -1,4 +1,4 @@
-#include <checker.h>
+#include "checker.h"
 
 void	swap(t_stack *stack)
 {

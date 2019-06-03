@@ -1,22 +1,4 @@
-#include <push_swap.h>
-
-int		find_small(t_stack stack, int *a)
-{
-	int i;
-
-	i = 1;
-	*a = stack.nums[0];
-	while (i < stack.size)
-	{
-		if ((stack.nums)[i] < *a)
-			*a = (stack.nums)[i];
-		i++;
-	}
-	i = 0;
-	while ((stack.nums)[i] != *a)
-		i++;
-	return (i);
-}
+#include "push_swap.h"
 
 int		is_sorted(t_stack *stack)
 {

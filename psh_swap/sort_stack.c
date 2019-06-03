@@ -1,4 +1,4 @@
-#include <push_swap.h>
+#include "push_swap.h"
 
 void	sort_three(t_stack *a, t_stack *b)
 {
@@ -22,22 +22,6 @@ void	sort_three(t_stack *a, t_stack *b)
 		print_swap(*a, *b, 'a');
 		sort_three(a, b);
 	}
-}
-
-int		get_index(t_stack *a, int n)
-{
-	int	i;
-	int	*arr;
-
-	arr = a->nums;
-	i = 0;
-	while (i < a->size)
-	{
-		if (arr[i] == n)
-			return (i);
-		i++;
-	}
-	return (-1);
 }
 
 int		get_nearest_number(t_stack *stack, int num)
@@ -74,18 +58,6 @@ int		find_place(t_stack *s, int num)
 	if (nearest < num)
 		index += 1;
 	return (index);
-}
-
-int		ft_min3(int a, int b, int c)
-{
-	int min;
-
-	min = a;
-	if (min > b)
-		min = b;
-	if (min > c)
-		min = c;
-	return (min);
 }
 
 int		get_way_inner(t_stack *s, int index)
@@ -131,27 +103,6 @@ int		get_way_ab(t_stack *a, t_stack *b)
 	return (min_way);
 }
 
-
-
-
-int		get_min(t_stack *s)
-{
-	int	i;
-	int	*arr;
-	int	min;
-
-	i = 0;
-	arr = s->nums;
-	min = arr[i];
-	while (i < s->size)
-	{
-		if (min > arr[i])
-			min = arr[i];
-		i++;
-	}
-	return (min);
-}
-
 int		get_way_a(t_stack *a, t_stack *b)
 {
 	int	index;
@@ -162,25 +113,6 @@ int		get_way_a(t_stack *a, t_stack *b)
 		index = get_index(a, get_min(a));
 	way = index > a->size / 2 ? a->size - index : index;
 	return (way);
-}
-
-
-int		get_max(t_stack *s)
-{
-	int	*i;
-	int	j;
-	int	max;
-
-	i = s->nums;
-	j = 0;
-	max = i[j];
-	while (j < s->size)
-	{
-		if (i[j] > max)
-			max = i[j];
-		j++;
-	}
-	return (max);
 }
 
 void	scroll_up(t_stack *a, t_stack *b, int n, char ch)

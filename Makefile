@@ -8,7 +8,8 @@ LIBFTLINK			=	-L./libft -lft
 
 P_SWAP_SRC_PATH		=	./psh_swap/
 P_SWAP_FILES		=	push_swap.c sort_stack.c operations.c create_stack.c \
-						check_valid.c check_stack.c operations_name.c
+						check_valid.c check_stack.c operations_name.c utils.c \
+						utils1.c
 PSW_INCLUDES		=	-I./psh_swap/ $(LIBFTINC)
 PSW_OBJ				=	$(P_SWAP_FILES:.c=.o)
 

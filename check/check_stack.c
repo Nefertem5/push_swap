@@ -1,4 +1,4 @@
-#include <checker.h>
+#include "checker.h"
 
 int		is_sorted(t_stack *stack)
 {

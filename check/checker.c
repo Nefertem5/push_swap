@@ -1,4 +1,4 @@
-#include <checker.h>
+#include "checker.h"
 
 int		to_return(int *arr, int *arr2, int flag, char **argvs)
 {
@@ -27,9 +27,9 @@ int		main(int argc, char const **argv)
 	}
 	else
 		v_flag = ft_strcmp(argv[1], "-v") == 0;
-	if (flag == 1 && !check_valid(check_len(argvs) - v_flag, (const char**)argvs + v_flag))
+	if (flag == 1 && !check_valid(check_len(argvs) - v_flag, (const char**)argvs + v_flag, flag))
 		error_ex(argvs);
-	else if (!check_valid(argc - v_flag, argv + v_flag))
+	if (!flag && !check_valid(argc - v_flag, argv + v_flag, flag))
 		error_ex(NULL);
 	if (flag == 0)
 		a = create_stacks(&b, argc - 1 - v_flag, argv + v_flag, flag);

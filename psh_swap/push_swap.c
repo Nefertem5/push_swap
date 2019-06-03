@@ -1,31 +1,15 @@
-#include <push_swap.h>
+#include "push_swap.h"
 
-void			ft_del_tab(char **tab)
+int		to_return(int *arr, int *arr2, int flag, char **argvs)
 {
-	size_t	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		++i;
-	}
-	free(tab);
+	free(arr);
+	free(arr2);
+	if (flag == 1)
+		ft_del_tab(argvs);
+	return (0);
 }
 
-int	check_len(char **av)
-{
-	int	i;
-
-	i = 0;
-	while(av[i])
-	{
-		i++;
-	}
-	return (i);
-}
-
-int	main(int argc, char const **argv)
+int		main(int argc, char const **argv)
 {
 	t_stack		a;
 	t_stack		b;
@@ -38,30 +22,13 @@ int	main(int argc, char const **argv)
 	if (argc == 2 && (flag = 1))
 		argvs = ft_strsplit(argv[1], ' ');
 	if (flag == 1 && !check_valid(check_len(argvs), (const char**)argvs, flag))
-	{
-		ft_putstr("Error\n");
-		ft_del_tab(argvs);
-		exit(1);
-	}
+		error_ex(argvs);
 	if (flag == 0 && !check_valid(argc, argv, flag))
-	{
-		ft_putstr("Error\n");
-		exit(1);
-	}
+		error_ex(NULL);
 	if (flag == 0)
-	{
-		a = create_stack_a(argc - 1, argv, flag);
-		b = create_stack_b(argc - 1, argv, flag);
-	}
+		a = create_stacks(&b, argc - 1, argv, flag);
 	else
-	{
-		a = create_stack_a(check_len(argvs), (const char **)argvs, flag);
-		b = create_stack_b(check_len(argvs),  (const char **)argvs, flag);
-	}
+		a = create_stacks(&b, check_len(argvs), (const char **)argvs, flag);
 	sort_stacks(a, b);
-	free(a.nums);
-	free(b.nums);
-	if (flag == 1)
-		ft_del_tab(argvs);
-	return (0);
+	return (to_return(a.nums, b.nums, flag, argvs));
 }

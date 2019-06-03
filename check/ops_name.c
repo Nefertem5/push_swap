@@ -1,4 +1,4 @@
-#include <checker.h>
+#include "checker.h"
 
 void	error(t_stack *a, t_stack *b, char *str)
 {
